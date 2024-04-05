@@ -16,6 +16,20 @@ function App() {
 
   const onButtonSubmit = () => {
     console.log("click");
+
+    app.models
+      .predict(
+        "6dc7e46bc9124c5c8824be4822abe105",
+        "https://samples.clarifai.com/face-det.jpg"
+      )
+      .then(
+        function (response) {
+          console.log(response);
+        },
+        function (err) {
+          // there was an error
+        }
+      );
   };
 
   return (
