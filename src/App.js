@@ -55,13 +55,29 @@ const returnClarifaiRequestOptions = (imageUrl) => {
 ///////////////////////////////////////////////////////////////////////////////////
 //End of the Clarifai API
 
-// const app = new Clarifai.App({
-//   apiKey: "4e7c3821d93c4ea5ba90d0a662936f5a",
-// });
-
 function App() {
   const [input, setInput] = useState("");
   const [imageUrl, setImageUrl] = useState("");
+  const [box, setBox] = useState({});
+
+  const calculateFaceLocation = (data) => {
+    const clarifaiFace =
+      data.outputs[0].data.regions[0].region_info.bounding_box;
+    const image = document.getElementById("inputimage");
+    const width = Number(image.width);
+    const height = Number(image.height);
+    return {
+      leftCol: clarifaiFace.left_col * width,
+      topRow: clarifaiFace.top_row * height,
+      rightCol: width - clarifaiFace.right_col * width,
+      bottomRow: height - clarifaiFace.bottom_row * height,
+    };
+  };
+
+  const displayFaceBox = (box) => {
+    console.log(box);
+    setBox(box);
+  };
 
   const onInputChange = (event) => {
     console.log(event.target.value);
@@ -81,16 +97,8 @@ function App() {
       returnClarifaiRequestOptions(input)
     )
       .then((response) => response.json())
-      .then(
-        function (response) {
-          console.log(
-            response.outputs[0].data.regions[0].region_info.bounding_box
-          );
-        },
-        function (err) {
-          // there was an error
-        }
-      );
+      .then((response) => displayFaceBox(calculateFaceLocation(response)))
+      .catch((err) => console.log(err));
   };
 
   return (
