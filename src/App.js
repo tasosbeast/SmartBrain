@@ -61,6 +61,7 @@ const returnClarifaiRequestOptions = (imageUrl) => {
 
 function App() {
   const [input, setInput] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
 
   const onInputChange = (event) => {
     console.log(event.target.value);
@@ -68,7 +69,7 @@ function App() {
   };
 
   const onButtonSubmit = () => {
-    console.log("click");
+    setImageUrl(input);
 
     // app.models
     //   .predict(
@@ -100,7 +101,7 @@ function App() {
         onInputChange={onInputChange}
         onButtonSubmit={onButtonSubmit}
       />
-      <FaceRecognition />
+      <FaceRecognition imageUrl={imageUrl} />
     </div>
   );
 }
