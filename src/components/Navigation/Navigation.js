@@ -1,9 +1,16 @@
 import React from "react";
 
-const Navigation = () => {
+const Navigation = ({ onRouteChange }) => {
   return (
     <nav className="flex justify-end">
-      <p className="text-2xl link dim black underline p-3 cursor-pointer">
+      <p
+        onClick={
+          onRouteChange === "signin"
+            ? () => onRouteChange("home")
+            : () => onRouteChange("signin")
+        }
+        className="text-2xl link dim black underline p-3 cursor-pointer"
+      >
         Sign Out
       </p>
     </nav>
