@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
 import Navigation from "./components/Navigation/Navigation";
+import SignIn from "./components/Signin/Signin";
 import Logo from "./components/Logo/Logo";
 import Rank from "./components/Rank/Rank";
 import ImageLinkForm from "./components/ImageLinkForm/ImageLinkForm";
@@ -58,6 +59,7 @@ function App() {
   const [input, setInput] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [box, setBox] = useState({});
+  const [route, setRoute] = useState("signin");
 
   const calculateFaceLocation = (data) => {
     const clarifaiFace =
@@ -103,14 +105,21 @@ function App() {
   return (
     <div className="App">
       <ParticlesBg type="cobweb" bg={true} />
+
       <Navigation />
-      <Logo />
-      <Rank />
-      <ImageLinkForm
-        onInputChange={onInputChange}
-        onButtonSubmit={onButtonSubmit}
-      />
-      <FaceRecognition box={box} imageUrl={imageUrl} />
+      {route === "signin" ? (
+        <SignIn />
+      ) : (
+        <>
+          <Logo />
+          <Rank />
+          <ImageLinkForm
+            onInputChange={onInputChange}
+            onButtonSubmit={onButtonSubmit}
+          />
+          <FaceRecognition box={box} imageUrl={imageUrl} />
+        </>
+      )}
     </div>
   );
 }
