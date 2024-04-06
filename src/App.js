@@ -102,13 +102,17 @@ function App() {
       .catch((err) => console.log(err));
   };
 
+  const onRouteChange = (route) => {
+    setRoute(route);
+  };
+
   return (
     <div className="App">
       <ParticlesBg type="cobweb" bg={true} />
 
       <Navigation />
       {route === "signin" ? (
-        <SignIn />
+        <SignIn onRouteChange={onRouteChange} />
       ) : (
         <>
           <Logo />
