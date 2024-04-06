@@ -6,7 +6,6 @@ import Rank from "./components/Rank/Rank";
 import ImageLinkForm from "./components/ImageLinkForm/ImageLinkForm";
 import FaceRecognition from "./components/FaceRecognition/FaceRecognition";
 import ParticlesBg from "particles-bg";
-// import Clarifai from "clarifai";
 
 //the New Clarifai API
 const returnClarifaiRequestOptions = (imageUrl) => {
