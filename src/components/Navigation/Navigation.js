@@ -4,11 +4,7 @@ const Navigation = ({ onRouteChange }) => {
   return (
     <nav className="flex justify-end">
       <p
-        onClick={
-          onRouteChange === "signin"
-            ? () => onRouteChange("home")
-            : () => onRouteChange("signin")
-        }
+        onClick={() => onRouteChange("signin")}
         className="text-2xl link dim black underline p-3 cursor-pointer"
       >
         Sign Out
